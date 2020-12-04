@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {Route, Switch} from "react-router-dom";
+import Container from "@material-ui/core/Container";
+import AppToolbar from "./components/UI/AppToolbar/AppToolbar";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import {useSelector} from "react-redux";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const user = useSelector(state => state.users.user);
+    return(
+        <>
+            <CssBaseline />
+            <AppToolbar user={user} />
+            <main>
+                <Container>
+                    <Switch>
+                        <Route path="/" exact component={AppToolbar} />
+                    </Switch>
+                </Container>
+            </main>
+        </>
+    )};
 
 export default App;
