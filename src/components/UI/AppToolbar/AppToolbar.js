@@ -7,6 +7,7 @@ import {NavLink} from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import AnonymousMenu from "../../Menu/AnonymousMenu";
 import UserMenu from "../../Menu/UserMenu";
+import image from "../../../assets/images/logo.png";
 
 const useStyles = makeStyles(theme => ({
     mainLink: {
@@ -14,16 +15,27 @@ const useStyles = makeStyles(theme => ({
         textDecoration: "none",
         "&:hover": {
             color: "inherit"
-        }
+        },
+        marginTop: 10
     },
     staticToolbar: {
         marginBottom: theme.spacing(2)
     },
     title: {
-        flexGrow: 1
+        flexGrow: 1,
+        display: "flex"
     },
     container: {
         display: "flex"
+    },
+    background: {
+        background: "#4C1E51",
+        height: 75,
+        fontFamily: 'Open Sans',
+        textTransform: "uppercase"
+    },
+    logo: {
+        width: 60
     }
 }));
 
@@ -32,11 +44,12 @@ const AppToolbar = ({user}) => {
     const classes = useStyles();
     return (
         <>
-            <AppBar>
+            <AppBar className={classes.background}>
                 <Toolbar>
                     <Container className={classes.container}>
                         <Typography variant="h6" className={classes.title}>
-                            <NavLink to="/" className={classes.mainLink}>Computer parts shop</NavLink>
+                            <img src={image} className={classes.logo} alt={"img"}/>
+                            <NavLink to="/" className={classes.mainLink}>Elven chat</NavLink>
                         </Typography>
                         {user ?
                             <UserMenu user={user}/>
