@@ -1,0 +1,30 @@
+.message{
+    position: relative;
+    border-radius: 7px;
+    margin-bottom: 10px;
+    padding: 5px 20px;
+    background: #4C1E51;
+}
+
+.authorAndData {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text {
+    color: #dde6cb;
+    padding: 0;
+    margin-top: 0;
+    font-size: 17px;
+}
+
+.author {
+    color: #bf6f34;
+    font-size: 21px;
+    margin: 0;
+    padding: 0;
+}
+
+.data {
+    color: #dde6cb;
+}

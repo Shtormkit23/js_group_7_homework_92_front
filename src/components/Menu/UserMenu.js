@@ -48,8 +48,6 @@ const UserMenu = ({user}) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <MenuItem>Profile</MenuItem>
-                <MenuItem>My account</MenuItem>
                 <MenuItem onClick={logout}>Logout</MenuItem>
             </Menu>
         </>
