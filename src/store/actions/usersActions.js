@@ -67,7 +67,7 @@ export const facebookLogin = data => {
         try {
             const response = await axios.post("/users/facebookLogin", data);
             dispatch(loginUserSuccess(response.data));
-            dispatch(push("/"));
+            dispatch(push("/chat"));
         } catch (e) {
             dispatch(loginUserFailure(e.response.data));
         }
