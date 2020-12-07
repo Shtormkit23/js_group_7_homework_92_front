@@ -23,7 +23,6 @@ const Chat = () => {
         ws.current.onclose = () => console.log("ws closed");
         ws.current.onmessage = event => {
             const decodedMessage = JSON.parse(event.data);
-            console.log(decodedMessage)
             if (decodedMessage.type === 'NEW_MESSAGE') {
                 setMessages((messages) => [...messages, decodedMessage]);
             } else if (decodedMessage.type === "ALL_MESSAGES") {
@@ -36,7 +35,6 @@ const Chat = () => {
             // }
         };
 
-        console.log(usersConnections)
         return () => ws.current.close();
     }, []);
 
