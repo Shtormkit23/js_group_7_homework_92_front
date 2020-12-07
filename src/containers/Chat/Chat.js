@@ -36,7 +36,7 @@ const Chat = () => {
         };
 
         return () => ws.current.close();
-    }, []);
+    }, [user.token]);
 
     const changeMessage = e => {
         setMessageText(e.target.value);
