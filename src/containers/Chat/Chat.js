@@ -4,6 +4,7 @@ import './Chat.css'
 import Message from "../../components/Messages/Message";
 import {useSelector} from "react-redux";
 import ActiveUser from "../../components/activeUser/activeUser";
+import ReconnectingWebSocket from 'reconnecting-websocket';
 
 
 const Chat = () => {
@@ -14,7 +15,7 @@ const Chat = () => {
     const user = useSelector(state => state.users.user);
 
     useEffect(() => {
-        ws.current = new WebSocket(`ws://localhost:8003/chat?token=${user.token}`);
+        ws.current = new ReconnectingWebSocket(`ws://localhost:8003/chat?token=${user.token}`);
         ws.current.onopen = () => {
             ws.current.send(JSON.stringify({type: "GET_ALL_MESSAGES"}))
             ws.current.send(JSON.stringify({type: "GET_ALL_CONNECTIONS"}))
@@ -30,10 +31,12 @@ const Chat = () => {
             }else if (decodedMessage.type === "ALL_CONNECTIONS") {
                 setUsersConnections(usersConnections => [...usersConnections, ...decodedMessage.connections])
             }
+            // else if (decodedMessage.type === "NEW_USER") {
+            //     setUsersConnections(usersConnections => [...usersConnections, ...decodedMessage])
+            // }
         };
 
         console.log(usersConnections)
-
         return () => ws.current.close();
     }, []);
 
@@ -43,11 +46,11 @@ const Chat = () => {
 
     const sendMessage = event => {
         event.preventDefault();
-
         ws.current.send(JSON.stringify({
             type: 'CREATE_MESSAGE',
             message: messageText
         }));
+        setMessageText('');
     };
 
 
@@ -68,6 +71,7 @@ const Chat = () => {
             <EnteringMessage
                 addMessage = {sendMessage}
                 changeMessage = {changeMessage}
+                value = {messageText}
             />
             <div className="users">
                 {usersConnections && usersConnections.map((user,index) => (
